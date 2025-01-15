@@ -1,8 +1,15 @@
 package cz.uhk.kppro2025.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+@Entity
+@Table(name = "drivers")
 public class Driver {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int personalId;
 
@@ -17,6 +24,14 @@ public class Driver {
     @Min(value = 10000, message = "Salary must be at least 10 000")
     @Max(value = 80000, message = "Salary must not exceed 80 000")
     private int salary;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getPersonalId() {
         return personalId;

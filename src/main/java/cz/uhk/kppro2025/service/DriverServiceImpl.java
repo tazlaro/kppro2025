@@ -1,59 +1,56 @@
 package cz.uhk.kppro2025.service;
 
 import cz.uhk.kppro2025.model.Driver;
+import cz.uhk.kppro2025.repository.DriverRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DriverServiceImpl implements DriverService{
 
-    private List<Driver> drivers = new ArrayList<>();
+    private DriverRepository driverRepository;
 
-    @Override
-    public List<Driver> getAllDrivers() {
-        return drivers;
+    @Autowired
+    public DriverServiceImpl(DriverRepository driverRepository){
+        this.driverRepository = driverRepository;
     }
 
     @Override
-    public Driver getDriver(int index) {
-        return drivers.get(index);
+    public List<Driver> getAllDrivers() {
+        return driverRepository.findAll();
+    }
+
+    @Override
+    public Driver getDriver(Long id) {
+        return driverRepository.findById(id).orElse(null);
     }
 
     @Override
     public boolean addDriver(Driver driver) {
-        int index = getDriverIndex(driver.getPersonalId());
-        if(index == -1){
-            drivers.add(driver);
-            return true;
-        }
-        return false;
+        driverRepository.save(driver);
+        return true;
     }
 
     @Override
     public boolean updateDriver(Driver driver) {
-        int index = getDriverIndex(driver.getPersonalId());
-        if(index != -1){
-            drivers.remove(index);
-            drivers.add(driver);
+        Optional<Driver> driverDB = driverRepository.findById(driver.getId());
+        if(driverDB.isPresent()){
+            driverRepository.save(driver);
             return true;
         }
         return false;
     }
 
     @Override
-    public Driver deleteDriver(int index) {
-        Driver driver = drivers.get(index);
-        drivers.remove(index);
-        return driver;
-    }
-
-    private int getDriverIndex(int personalId) {
-        for(int i = 0; i < drivers.size(); i++){
-            if(drivers.get(i).getPersonalId() == personalId){
-                return i;
-            }
+    public Driver deleteDriver(Long id) {
+        Optional<Driver> driverDB = driverRepository.findById(id);
+        if(driverDB.isPresent()){
+            Driver driver = driverDB.get();
+            driverRepository.delete(driverDB.get());
+            return driver;
         }
-        return -1;
+        return null;
     }
 }

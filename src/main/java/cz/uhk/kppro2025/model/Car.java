@@ -1,8 +1,15 @@
 package cz.uhk.kppro2025.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+@Entity
+@Table(name = "cars")
 public class Car {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotEmpty(message = "SPZ is required")
     private String spz;
@@ -17,6 +24,14 @@ public class Car {
     @Min(value = 2)
     @Max(value = 9)
     private int numberOfSeats;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getSpz() {
         return spz;
