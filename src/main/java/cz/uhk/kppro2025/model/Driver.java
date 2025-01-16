@@ -2,6 +2,7 @@ package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "drivers")
@@ -24,6 +25,17 @@ public class Driver {
     @Min(value = 10000, message = "Salary must be at least 10 000")
     @Max(value = 80000, message = "Salary must not exceed 80 000")
     private int salary;
+
+    @OneToMany (mappedBy = "driver")
+    private List<Car> cars;
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
 
     public Long getId() {
         return id;
