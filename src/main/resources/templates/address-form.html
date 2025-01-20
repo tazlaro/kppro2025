@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Address Form</title>
+</head>
+<body>
+    <h1>Address Form</h1>
+
+<!--    Nutne nastavit parametr id na puvodni hodnotu editovaneho objektu, jinak se vytvori novy zaznam v DB  -->
+<!--    1. zpusob z AI  -->
+    <!--    <form th:action="@{/addresses/update/{id}(id=${address.id})}" th:object="${address}" method="post">-->
+<!--    2. zpusob ze cviceni  -->
+    <form th:action="@{/addresses}" th:object="${address}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label for="street">Street:</label>
+        <input type="text" id="street" th:field="*{street}" />
+        <br/>
+        <label for="city">City:</label>
+        <input type="text" id="city" th:field="*{city}" />
+        <br/>
+        <label for="zip">ZIP:</label>
+        <input type="text" id="zip" th:field="*{zip}" />
+        <br/>
+        <label for="country">Country:</label>
+        <input type="text" id="country" th:field="*{country}" />
+        <br/>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

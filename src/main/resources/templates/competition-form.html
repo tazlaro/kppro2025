@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Competition Form</title>
+</head>
+<body>
+    <h1>Competition Form</h1>
+    <form th:action="@{/competitions}" th:object="${competition}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <br/>
+        <label for="date">Date:</label>
+        <input type="date" id="date" th:field="*{date}" />
+        <br/>
+        <label for="discipline">Discipline:</label>
+        <input type="text" id="discipline" th:field="*{discipline}" />
+        <br/>
+        <label for="description">Description:</label>
+        <input type="text" id="description" th:field="*{description}" />
+        <br/>
+        <label for="proposition">Proposition:</label>
+        <input type="text" id="proposition" th:field="*{proposition}" />
+        <br/>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

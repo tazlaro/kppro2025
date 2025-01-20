@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clubs</title>
+</head>
+<body>
+    <h1>Clubs</h1>
+    <a th:href="@{/clubs/new}">Add New Club</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="club : ${clubs}">
+            <td th:text="${club.number}">Number</td>
+            <td th:text="${club.name}">Name</td>
+            <td th:text="${club.description}">Description</td>
+            <td th:text="${club.email}">Email</td>
+            <td th:text="${club.phone}">Phone</td>
+            <td>
+                <a th:href="@{/clubs/edit/{id}(id=${club.id})}">Edit</a>
+                <a th:href="@{/clubs/delete/{id}(id=${club.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

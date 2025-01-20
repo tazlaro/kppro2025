@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    <a th:href="@{/results/new}">Add New Result</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Score Total</th>
+            <th>Rank</th>
+            <th>Performance Class</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="result : ${results}">
+            <td th:text="${result.scoreTotal}">Score Total</td>
+            <td th:text="${result.rank}">Rank</td>
+            <td th:text="${result.performanceClass}">Performance Class</td>
+            <td>
+                <a th:href="@{/results/edit/{id}(id=${result.id})}">Edit</a>
+                <a th:href="@{/results/delete/{id}(id=${result.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
