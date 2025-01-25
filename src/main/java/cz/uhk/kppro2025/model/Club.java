@@ -1,6 +1,7 @@
 package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -21,10 +22,19 @@ public class Club {
     @OneToMany(mappedBy = "club")
     private List<User> users;
 
+    @NotNull
+    @Min(0)
+    @Max(99999)
     private int number;
+    @NotEmpty
+    @Size(min = 3, max = 50)
     private String name;
+    @Size(max = 255)
     private String description;
+    @Email
     private String email;
+//    @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$", message = "Invalid phone number")
+    @Pattern(regexp = "^$|^\\+?[0-9. ()-]{7,25}$", message = "Invalid phone number") // empty or valid phone number
     private String phone;
 
     public Long getId() {

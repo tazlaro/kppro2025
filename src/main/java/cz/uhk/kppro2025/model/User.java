@@ -1,8 +1,8 @@
 package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 import java.util.List;
 
@@ -33,17 +33,31 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Result> results;
 
+    @NotBlank
+    @Size(min = 4, max = 50)
     private String username;
+    @NotBlank
+    @Size(min = 4, max = 250)
     private String password;
+    @NotBlank
+    @Size(max = 10)
     private String role;
 
+    @NotBlank
+    @Size(max = 50)
     private String firstName;
+    @NotBlank
+    @Size(max = 50)
     private String lastName;
 
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
+    @Email
     private String email;
+//    @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$", message = "Invalid phone number")
+    @Pattern(regexp = "^$|^\\+?[0-9. ()-]{7,25}$", message = "Invalid phone number") // empty or valid phone number
     private String phone;
 
     public Long getId() {

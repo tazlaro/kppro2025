@@ -2,11 +2,12 @@ package cz.uhk.kppro2025.controller;
 
 import cz.uhk.kppro2025.model.Address;
 import cz.uhk.kppro2025.service.AddressService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -35,7 +36,10 @@ public class AddressController {
     }
 
     @PostMapping
-    public String saveAddress(@ModelAttribute("address") Address address) {
+    public String saveAddress(@Valid @ModelAttribute("address") Address address, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "address-form";
+        }
         addressService.saveAddress(address);
         return "redirect:/addresses";
     }
@@ -48,7 +52,10 @@ public class AddressController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateAddress(@PathVariable("id") Long id, @ModelAttribute("address") Address address) {
+    public String updateAddress(@PathVariable("id") Long id, @Valid @ModelAttribute("address") Address address, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "address-form";
+        }
         address.setId(id);
         addressService.saveAddress(address);
         return "redirect:/addresses";

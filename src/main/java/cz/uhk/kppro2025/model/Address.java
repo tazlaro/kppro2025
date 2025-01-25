@@ -1,6 +1,9 @@
 package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -20,9 +23,16 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<User> users;
 
+    @NotBlank
+    @Size(max = 100)
     private String street;
+    @NotBlank
+    @Size(max = 50)
     private String city;
+    @NotBlank
+    @Pattern(regexp = "\\d{5}", message = "Invalid ZIP code (5 digits)")
     private String zip;
+    @Size(max = 50)
     private String country;
 
     public Long getId() {

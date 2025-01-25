@@ -1,6 +1,9 @@
 package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,10 +30,16 @@ public class Competition {
     @ManyToMany(mappedBy = "competitions")
     private List<User> users;
 
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
+    @NotEmpty
+    @Size(max = 10)
     private String discipline;
+    @NotEmpty
+    @Size(max = 50)
     private String name;
+    @Size(max = 255)
     private String description;
     private String proposition;
 

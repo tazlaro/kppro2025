@@ -2,11 +2,12 @@ package cz.uhk.kppro2025.controller;
 
 import cz.uhk.kppro2025.model.Result;
 import cz.uhk.kppro2025.service.ResultService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -35,7 +36,10 @@ public class ResultController {
     }
 
     @PostMapping
-    public String saveResult(@ModelAttribute("result") Result result) {
+    public String saveResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "result-form";
+        }
         resultService.saveResult(result);
         return "redirect:/results";
     }
@@ -48,7 +52,10 @@ public class ResultController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateResult(@PathVariable("id") Long id, @ModelAttribute("result") Result result) {
+    public String updateResult(@PathVariable("id") Long id, @Valid @ModelAttribute("result") Result result, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "result-form";
+        }
         result.setId(id);
         resultService.saveResult(result);
         return "redirect:/results";

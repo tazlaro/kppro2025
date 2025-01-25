@@ -2,11 +2,12 @@ package cz.uhk.kppro2025.controller;
 
 import cz.uhk.kppro2025.model.Competition;
 import cz.uhk.kppro2025.service.CompetitionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -35,7 +36,10 @@ public class CompetitionController {
     }
 
     @PostMapping
-    public String saveCompetition(@ModelAttribute("competition") Competition competition) {
+    public String saveCompetition(@Valid @ModelAttribute("competition") Competition competition, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "competition-form";
+        }
         competitionService.saveCompetition(competition);
         return "redirect:/competitions";
     }
@@ -48,7 +52,10 @@ public class CompetitionController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateCompetition(@PathVariable("id") Long id, @ModelAttribute("competition") Competition competition) {
+    public String updateCompetition(@PathVariable("id") Long id, @Valid @ModelAttribute("competition") Competition competition, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "competition-form";
+        }
         competition.setId(id);
         competitionService.saveCompetition(competition);
         return "redirect:/competitions";

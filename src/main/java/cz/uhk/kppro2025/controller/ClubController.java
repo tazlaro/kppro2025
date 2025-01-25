@@ -2,11 +2,12 @@ package cz.uhk.kppro2025.controller;
 
 import cz.uhk.kppro2025.model.Club;
 import cz.uhk.kppro2025.service.ClubService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -35,7 +36,10 @@ public class ClubController {
     }
 
     @PostMapping
-    public String saveClub(@ModelAttribute("club") Club club) {
+    public String saveClub(@Valid @ModelAttribute("club") Club club, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "club-form";
+        }
         clubService.saveClub(club);
         return "redirect:/clubs";
     }
@@ -48,7 +52,10 @@ public class ClubController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateClub(@PathVariable("id") Long id, @ModelAttribute("club") Club club) {
+    public String updateClub(@PathVariable("id") Long id, @Valid @ModelAttribute("club") Club club, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "club-form";
+        }
         club.setId(id);
         clubService.saveClub(club);
         return "redirect:/clubs";

@@ -1,6 +1,8 @@
 package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -22,8 +24,11 @@ public class Result {
 //    @ElementCollection
 //    private List<Integer> scoreParts;
 
+    @Min(0)
     private int scoreTotal;
+    @Min(0)
     private int rank;
+    @Size(max = 10)
     private String performanceClass;
 
     public Long getId() {

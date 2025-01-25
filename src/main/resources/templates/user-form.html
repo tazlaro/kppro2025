@@ -10,29 +10,37 @@
 
         <label for="username">Username:</label>
         <input type="text" id="username" th:field="*{username}" />
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
         <br/>
         <label for="password">Password:</label>
         <input type="text" id="password" th:field="*{password}" />
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         <br/>
         <label for="role">Role:</label>
         <input type="text" id="role" th:field="*{role}" />
+        <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
 
         <br/>
 
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" th:field="*{firstName}" />
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
         <br/>
         <label for="lastName">Last Name:</label>
         <input type="text" id="lastName" th:field="*{lastName}" />
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         <br/>
         <label for="birthday">Birthday:</label>
         <input type="date" id="birthday" th:field="*{birthday}" />
+        <span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
         <br/>
         <label for="email">Email:</label>
         <input type="text" id="email" th:field="*{email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         <br/>
         <label for="phone">Phone:</label>
         <input type="text" id="phone" th:field="*{phone}" />
+        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
         <br/>
         <button type="submit">Save</button>
     </form>
