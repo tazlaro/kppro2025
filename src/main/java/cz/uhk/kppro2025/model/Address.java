@@ -35,6 +35,12 @@ public class Address {
     @Size(max = 50)
     private String country;
 
+    // NOT working - 404 error - not used in the project
+    // For URL redirection after saving the address
+    // Field to store the URL to return to after saving the address. It is not stored in the database.
+    @Transient
+    private String returnUrl;
+
     public Long getId() {
         return id;
     }
@@ -97,5 +103,13 @@ public class Address {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getReturnUrl() {
+        return returnUrl;
+    }
+
+    public void setReturnUrl(String returnUrl) {
+        this.returnUrl = returnUrl;
     }
 }

@@ -44,6 +44,25 @@ public class AddressController {
         return "redirect:/addresses";
     }
 
+    // URL Redirection is not working: return (on Save button) gives 404 error
+
+    /*@GetMapping("/new")
+    public String showNewAddressForm(@RequestParam("returnUrl") String returnUrl, Model model) {
+        Address address = new Address();
+        address.setReturnUrl(returnUrl);
+        model.addAttribute("address", address);
+        return "address-form";
+    }
+
+    @PostMapping
+    public String saveAddress(@Valid @ModelAttribute("address") Address address, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "address-form";
+        }
+        addressService.saveAddress(address);
+        return "redirect:" + address.getReturnUrl();
+    }*/
+
     @GetMapping("/edit/{id}")
     public String showEditAddressForm(@PathVariable("id") Long id, Model model) {
         Address address = addressService.getAddressById(id);
