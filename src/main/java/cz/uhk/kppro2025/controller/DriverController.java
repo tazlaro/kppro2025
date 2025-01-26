@@ -46,7 +46,7 @@ public class DriverController {
     @GetMapping("/driverDelete/{id}")
     public String driverDelete(@PathVariable Long id){
         driverService.deleteDriver(id);
-        return "redirect:/";
+        return "redirect:/list";
     }
 
     @PostMapping("/driverSave")
@@ -56,7 +56,7 @@ public class DriverController {
             return "driver_edit";
         }
         driverService.addDriver(driver);
-        return "redirect:/";
+        return "redirect:/list";
     }
 
     @PostMapping("/driverUpdate")
@@ -66,6 +66,6 @@ public class DriverController {
             return "driver_edit";
         }
         driverService.updateDriver(driver);
-        return "redirect:/";
+        return "redirect:/list";
     }
 }

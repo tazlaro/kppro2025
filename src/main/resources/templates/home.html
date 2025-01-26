@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+
+    <a th:href="@{/admin}"><h3>Go to Admin portal</h3></a>
+
+    <form method="post" th:action="@{/logout}">
+        <input type="submit" value="Logout">
+    </form>
+
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/addresses}">Addresses</a></li>
+            <li><a th:href="@{/clubs}">Clubs</a></li>
+            <li><a th:href="@{/competitions}">Competitions</a></li>
+            <li><a th:href="@{/results}">Results</a></li>
+            <li><a th:href="@{/users}">Users</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <h1>Home</h1>
+        <!-- Content goes here -->
+        <p>Content goes here</p>
+    </div>
+
+</body>
+</html>

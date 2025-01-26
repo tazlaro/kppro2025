@@ -49,7 +49,7 @@ public class CarController {
     @GetMapping("/carDelete/{id}")
     public String carDelete(@PathVariable Long id){
         carService.deleteCar(id);
-        return "redirect:/";
+        return "redirect:/list";
     }
 
     @PostMapping("/carSave")
@@ -59,7 +59,7 @@ public class CarController {
             return "car_edit";
         }
         carService.addCar(car);
-        return "redirect:/";
+        return "redirect:/list";
     }
 
     @PostMapping("/carUpdate")
@@ -69,6 +69,6 @@ public class CarController {
             return "car_edit";
         }
         carService.updateCar(car);
-        return "redirect:/";
+        return "redirect:/list";
     }
 }

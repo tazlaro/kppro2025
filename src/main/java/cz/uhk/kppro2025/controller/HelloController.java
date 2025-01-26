@@ -19,8 +19,15 @@ public class HelloController {
         this.driverService = driverService;
     }
 
+    // new home page - template home.html (with navigation)
     @GetMapping("/")
-    public String main(Model model){
+    public String main(){
+        return "home";
+    }
+
+    // changed from main() (with mapping "/") to list() (with mapping "/list")
+    @GetMapping("/list")
+    public String list(Model model){
         model.addAttribute("cars", carService.getAllCars());
         model.addAttribute("drivers", driverService.getAllDrivers());
         return "list";
