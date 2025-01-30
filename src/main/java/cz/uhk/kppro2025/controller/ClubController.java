@@ -1,7 +1,6 @@
 package cz.uhk.kppro2025.controller;
 
-import cz.uhk.kppro2025.model.Address;
-import cz.uhk.kppro2025.model.Club;
+import cz.uhk.kppro2025.model.*;
 import cz.uhk.kppro2025.service.AddressService;
 import cz.uhk.kppro2025.service.ClubService;
 import jakarta.validation.Valid;
@@ -10,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/clubs")
@@ -80,6 +81,20 @@ public class ClubController {
     @GetMapping("/detail/{id}")
     public String showClubDetail(@PathVariable("id") Long id, Model model) {
         Club club = clubService.getClubById(id);
+
+        // Sort the users by Last Name and then First Name
+        List<User> sortedUsers = club.getUsers().stream()
+                .sorted(Comparator.comparing(User::getLastName)
+                        .thenComparing(User::getFirstName))
+                .collect(Collectors.toList());
+        club.setUsers(sortedUsers);
+
+        // Sort the competitions by date
+        List<Competition> sortedCompetitions = club.getCompetitions().stream()
+                .sorted(Comparator.comparing(Competition::getDate))
+                .collect(Collectors.toList());
+        club.setCompetitions(sortedCompetitions);
+
         model.addAttribute("club", club);
         return "club-detail";
     }

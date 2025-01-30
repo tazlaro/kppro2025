@@ -2,6 +2,7 @@ package cz.uhk.kppro2025.controller;
 
 import cz.uhk.kppro2025.model.Club;
 import cz.uhk.kppro2025.model.Competition;
+import cz.uhk.kppro2025.model.Result;
 import cz.uhk.kppro2025.service.ClubService;
 import cz.uhk.kppro2025.service.CompetitionService;
 import jakarta.validation.Valid;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/competitions")
@@ -84,6 +87,13 @@ public class CompetitionController {
     @GetMapping("/detail/{id}")
     public String showCompetitionDetail(@PathVariable("id") Long id, Model model) {
         Competition competition = competitionService.getCompetitionById(id);
+
+        // Sort the results by total score in descending order
+        List<Result> sortedResults = competition.getResults().stream()
+                .sorted(Comparator.comparing(Result::getScoreTotal).reversed())
+                .collect(Collectors.toList());
+        competition.setResults(sortedResults);
+
         model.addAttribute("competition", competition);
         return "competition-detail";
     }
