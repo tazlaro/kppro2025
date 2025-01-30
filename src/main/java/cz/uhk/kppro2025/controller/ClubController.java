@@ -1,6 +1,8 @@
 package cz.uhk.kppro2025.controller;
 
+import cz.uhk.kppro2025.model.Address;
 import cz.uhk.kppro2025.model.Club;
+import cz.uhk.kppro2025.service.AddressService;
 import cz.uhk.kppro2025.service.ClubService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,12 @@ import java.util.List;
 public class ClubController {
 
     private ClubService clubService;
+    private AddressService addressService;
 
     @Autowired
-    public ClubController(ClubService clubService) {
+    public ClubController(ClubService clubService, AddressService addressService) {
         this.clubService = clubService;
+        this.addressService = addressService;
     }
 
     @GetMapping
@@ -36,9 +40,14 @@ public class ClubController {
     }
 
     @PostMapping
-    public String saveClub(@Valid @ModelAttribute("club") Club club, BindingResult bindingResult) {
+    public String saveClub(@Valid @ModelAttribute("club") Club club, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("club", club);
             return "club-form";
+        }
+        Address address = club.getAddress();
+        if (address != null) {
+            addressService.saveAddress(address);
         }
         clubService.saveClub(club);
         return "redirect:/clubs";
@@ -52,8 +61,9 @@ public class ClubController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateClub(@PathVariable("id") Long id, @Valid @ModelAttribute("club") Club club, BindingResult bindingResult) {
+    public String updateClub(@PathVariable("id") Long id, @Valid @ModelAttribute("club") Club club, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("club", club);
             return "club-form";
         }
         club.setId(id);
@@ -65,5 +75,12 @@ public class ClubController {
     public String deleteClub(@PathVariable("id") Long id) {
         clubService.deleteClubById(id);
         return "redirect:/clubs";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String showClubDetail(@PathVariable("id") Long id, Model model) {
+        Club club = clubService.getClubById(id);
+        model.addAttribute("club", club);
+        return "club-detail";
     }
 }

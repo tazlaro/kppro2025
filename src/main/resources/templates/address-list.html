@@ -30,6 +30,14 @@
         </tbody>
     </table>
 
+    <br>
+    <p>!!! DO NOT DELETE !!!</p>
+    <p>The error message indicates a violation of referential integrity constraints when attempting to delete an Address entity that is still referenced by a Club or User entity through the address_id foreign key.
+        <br>
+        To resolve this issue, you need to ensure that all User entities referencing the Address entity are either deleted or updated to reference a different Address before deleting the Address entity.
+    </p>
+    <p>The address will be removed if you delete Club or User entity.</p>
+
 <!--    URL redirection - not working - not used-->
     <!-- Link to address form -->
     <!--        <a th:href="@{/addresses/new(returnUrl=${returnUrl})}">Add Address</a>-->

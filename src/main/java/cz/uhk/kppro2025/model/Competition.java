@@ -16,19 +16,19 @@ public class Competition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+//    @ManyToOne
+//    @JoinColumn(name = "address_id")
+//    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "club_id")
     private Club club;
 
-    @OneToMany(mappedBy = "competition")
+    @OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, orphanRemoval = true) // if a competition is deleted, delete all its results
     private List<Result> results;
 
-    @ManyToMany(mappedBy = "competitions")
-    private List<User> users;
+//    @ManyToMany(mappedBy = "competitions")
+//    private List<User> users;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -51,13 +51,13 @@ public class Competition {
         this.id = id;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 
     public Club getClub() {
         return club;
@@ -75,13 +75,13 @@ public class Competition {
         this.results = results;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     public Date getDate() {
         return date;

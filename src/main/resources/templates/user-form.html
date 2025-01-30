@@ -19,7 +19,6 @@
         <label for="role">Role:</label>
         <input type="text" id="role" th:field="*{role}" />
         <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
-
         <br/>
 
         <label for="firstName">First Name:</label>
@@ -42,6 +41,33 @@
         <input type="text" id="phone" th:field="*{phone}" />
         <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
         <br/>
+
+        <!-- Address fields -->
+        <h2>Address</h2>
+        <label for="street">Street:</label>
+        <input type="text" id="street" th:field="*{address.street}" />
+        <span th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"></span>
+        <br/>
+        <label for="city">City:</label>
+        <input type="text" id="city" th:field="*{address.city}" />
+        <span th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
+        <br/>
+        <label for="zip">ZIP:</label>
+        <input type="text" id="zip" th:field="*{address.zip}" />
+        <span th:if="${#fields.hasErrors('address.zip')}" th:errors="*{address.zip}"></span>
+        <br/>
+        <label for="country">Country:</label>
+        <input type="text" id="country" th:field="*{address.country}" />
+        <span th:if="${#fields.hasErrors('address.country')}" th:errors="*{address.country}"></span>
+        <br/>
+
+        <!-- Dropdown for selecting a club -->
+        <label for="club">Club:</label>
+        <select id="club" th:field="*{club.id}">
+            <option th:each="club : ${clubs}" th:value="${club.id}" th:text="${club.name}"></option>
+        </select>
+        <br/>
+
         <button type="submit">Save</button>
     </form>
 </body>

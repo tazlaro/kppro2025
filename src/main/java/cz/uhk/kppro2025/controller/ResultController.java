@@ -1,7 +1,9 @@
 package cz.uhk.kppro2025.controller;
 
 import cz.uhk.kppro2025.model.Result;
+import cz.uhk.kppro2025.service.CompetitionService;
 import cz.uhk.kppro2025.service.ResultService;
+import cz.uhk.kppro2025.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,14 @@ import java.util.List;
 public class ResultController {
 
     private final ResultService resultService;
+    private final CompetitionService competitionService;
+    private final UserService userService;
 
     @Autowired
-    public ResultController(ResultService resultService) {
+    public ResultController(ResultService resultService, CompetitionService competitionService, UserService userService) {
         this.resultService = resultService;
+        this.competitionService = competitionService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -32,12 +38,17 @@ public class ResultController {
     public String showNewResultForm(Model model) {
         Result result = new Result();
         model.addAttribute("result", result);
+        model.addAttribute("competitions", competitionService.getAllCompetitions());
+        model.addAttribute("users", userService.getAllUsers());
         return "result-form";
     }
 
     @PostMapping
-    public String saveResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult) {
+    public String saveResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("result", result);
+            model.addAttribute("competitions", competitionService.getAllCompetitions());
+            model.addAttribute("users", userService.getAllUsers());
             return "result-form";
         }
         resultService.saveResult(result);
@@ -48,6 +59,8 @@ public class ResultController {
     public String showEditResultForm(@PathVariable("id") Long id, Model model) {
         Result result = resultService.getResultById(id);
         model.addAttribute("result", result);
+        model.addAttribute("competitions", competitionService.getAllCompetitions());
+        model.addAttribute("users", userService.getAllUsers());
         return "result-form";
     }
 

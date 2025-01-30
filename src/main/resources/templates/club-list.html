@@ -25,6 +25,7 @@
             <td th:text="${club.email}">Email</td>
             <td th:text="${club.phone}">Phone</td>
             <td>
+                <a th:href="@{/clubs/detail/{id}(id=${club.id})}">View Details</a>
                 <a th:href="@{/clubs/edit/{id}(id=${club.id})}">Edit</a>
                 <a th:href="@{/clubs/delete/{id}(id=${club.id})}">Delete</a>
             </td>

@@ -14,11 +14,11 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "address")
-    private Club club;
-
     @OneToMany(mappedBy = "address")
-    private List<Competition> competitions;
+    private List<Club> clubs;
+
+//    @OneToMany(mappedBy = "address")
+//    private List<Competition> competitions;
 
     @OneToMany(mappedBy = "address")
     private List<User> users;
@@ -49,21 +49,21 @@ public class Address {
         this.id = id;
     }
 
-    public Club getClub() {
-        return club;
+    public List<Club> getClubs() {
+        return clubs;
     }
 
-    public void setClub(Club club) {
-        this.club = club;
+    public void setClubs(List<Club> clubs) {
+        this.clubs = clubs;
     }
 
-    public List<Competition> getCompetitions() {
-        return competitions;
-    }
-
-    public void setCompetitions(List<Competition> competitions) {
-        this.competitions = competitions;
-    }
+//    public List<Competition> getCompetitions() {
+//        return competitions;
+//    }
+//
+//    public void setCompetitions(List<Competition> competitions) {
+//        this.competitions = competitions;
+//    }
 
     public List<User> getUsers() {
         return users;

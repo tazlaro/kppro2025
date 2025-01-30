@@ -20,6 +20,21 @@
         <input type="text" id="performanceClass" th:field="*{performanceClass}" />
         <span th:if="${#fields.hasErrors('performanceClass')}" th:errors="*{performanceClass}"></span>
         <br/>
+
+        <label for="competition">Competition:</label>
+        <select id="competition" th:field="*{competition}">
+            <option th:each="competition : ${competitions}" th:value="${competition.id}" th:text="${competition.name}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('competition')}" th:errors="*{competition}"></span>
+        <br/>
+
+        <label for="user">User:</label>
+        <select id="user" th:field="*{user}">
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></span>
+        <br/>
+
         <button type="submit">Save</button>
     </form>
 </body>

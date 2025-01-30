@@ -1,6 +1,7 @@
 package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.util.List;
 
@@ -12,14 +13,15 @@ public class Club {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL) // if a club is deleted, delete its address
     @JoinColumn(name = "address_id")
+    @Valid // validate the address object as well (without this annotation, only the address id is validated)
     private Address address;
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany(mappedBy = "club", cascade = CascadeType.ALL, orphanRemoval = true) // if a club is deleted, delete all its competitions
     private List<Competition> competitions;
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany(mappedBy = "club", cascade = CascadeType.ALL, orphanRemoval = true) // if a club is deleted, delete all its users
     private List<User> users;
 
     @NotNull

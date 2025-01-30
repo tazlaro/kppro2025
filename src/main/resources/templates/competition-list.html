@@ -14,6 +14,7 @@
             <th>Discipline</th>
             <th>Description</th>
             <th>Proposition</th>
+            <th>Club</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -27,7 +28,13 @@
             <td th:text="${competition.discipline}">Discipline</td>
             <td th:text="${competition.description}">Description</td>
             <td th:text="${competition.proposition}">Proposition</td>
+
+<!--            Check if the club is not null, if it is not null, display the club name, otherwise display 'No Club'-->
+<!--            Club is a property of the competition object. It is a many-to-one relationship.-->
+            <td th:text="${competition.club != null ? competition.club.name : 'No Club'}">Club</td>
+
             <td>
+                <a th:href="@{/competitions/detail/{id}(id=${competition.id})}">View Details</a>
                 <a th:href="@{/competitions/edit/{id}(id=${competition.id})}">Edit</a>
                 <a th:href="@{/competitions/delete/{id}(id=${competition.id})}">Delete</a>
             </td>

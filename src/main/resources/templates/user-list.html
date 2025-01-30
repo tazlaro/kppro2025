@@ -18,6 +18,8 @@
             <th>Birthday</th>
             <th>Email</th>
             <th>Phone</th>
+
+            <th>Club</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -35,7 +37,13 @@
 
             <td th:text="${user.email}">Email</td>
             <td th:text="${user.phone}">Phone</td>
+
+<!--            Check if the club is not null, if it is not null, display the club name, otherwise display 'No Club'-->
+<!--            Club is a property of the user object. It is a many-to-one relationship.-->
+            <td th:text="${user.club != null ? user.club.name : 'No Club'}">Club</td>
+
             <td>
+                <a th:href="@{/users/detail/{id}(id=${user.id})}">View Details</a>
                 <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a>
                 <a th:href="@{/users/delete/{id}(id=${user.id})}">Delete</a>
             </td>

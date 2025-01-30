@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Competition Detail</title>
+</head>
+<body>
+<h1>Competition Detail</h1>
+<h2 th:text="${competition.name}">Competition Name</h2>
+<p><strong>Date:</strong> <span th:text="${#dates.format(competition.date, 'yyyy-MM-dd')}">Date</span></p>
+<p><strong>Discipline:</strong> <span th:text="${competition.discipline}">Discipline</span></p>
+<p><strong>Description:</strong> <span th:text="${competition.description}">Description</span></p>
+<p><strong>Proposition:</strong> <span th:text="${competition.proposition}">Proposition</span></p>
+
+<!--
+<h2>Address</h2>
+<p><strong>Street:</strong> <span th:text="${competition.address.street}">Street</span></p>
+<p><strong>City:</strong> <span th:text="${competition.address.city}">City</span></p>
+<p><strong>ZIP:</strong> <span th:text="${competition.address.zip}">ZIP</span></p>
+<p><strong>Country:</strong> <span th:text="${competition.address.country}">Country</span></p>
+-->
+
+<h2>Club</h2>
+<p th:if="${competition.club != null}">
+    <strong>Club Name:</strong> <span th:text="${competition.club.name}">Club Name</span>
+</p>
+<p th:if="${competition.club == null}">
+    <strong>Club:</strong> No Club
+</p>
+
+<h2>Results</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Score Total</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Club</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="result : ${competition.results}">
+        <td th:text="${result.scoreTotal}">Score Total</td>
+        <td th:text="${result.user.firstName}">First name</td>
+        <td th:text="${result.user.lastName}">Last name</td>
+        <td th:text="${result.user.club.name}">Club</td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/competitions}">Back to Competitions</a>
+</body>
+</html>

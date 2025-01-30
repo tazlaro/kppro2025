@@ -1,6 +1,7 @@
 package cz.uhk.kppro2025.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
@@ -14,23 +15,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL) // if a user is deleted, delete its address
     @JoinColumn(name = "address_id")
+    @Valid // validate the address object as well (without this annotation, only the address id is validated)
     private Address address;
 
     @ManyToOne
     @JoinColumn(name = "club_id")
     private Club club;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_competition",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "competition_id")
-    )
-    private List<Competition> competitions;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_competition",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "competition_id")
+//    )
+//    private List<Competition> competitions;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true) // if a user is deleted, delete all its results
     private List<Result> results;
 
     @NotBlank
@@ -84,13 +86,13 @@ public class User {
         this.club = club;
     }
 
-    public List<Competition> getCompetitions() {
-        return competitions;
-    }
-
-    public void setCompetitions(List<Competition> competitions) {
-        this.competitions = competitions;
-    }
+//    public List<Competition> getCompetitions() {
+//        return competitions;
+//    }
+//
+//    public void setCompetitions(List<Competition> competitions) {
+//        this.competitions = competitions;
+//    }
 
     public List<Result> getResults() {
         return results;

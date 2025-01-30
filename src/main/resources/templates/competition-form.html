@@ -28,6 +28,14 @@
         <input type="text" id="proposition" th:field="*{proposition}" />
         <span th:if="${#fields.hasErrors('proposition')}" th:errors="*{proposition}"></span>
         <br/>
+
+        <!-- Dropdown for selecting a club -->
+        <label for="club">Club:</label>
+        <select id="club" th:field="*{club.id}">
+            <option th:each="club : ${clubs}" th:value="${club.id}" th:text="${club.name}"></option>
+        </select>
+        <br/>
+
         <button type="submit">Save</button>
     </form>
 </body>

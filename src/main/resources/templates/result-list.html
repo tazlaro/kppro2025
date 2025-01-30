@@ -12,6 +12,13 @@
             <th>Score Total</th>
             <th>Rank</th>
             <th>Performance Class</th>
+
+            <th>Competition</th>
+            <th>Discipline</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Club</th>
+
             <th>Actions</th>
         </tr>
         </thead>
@@ -20,6 +27,16 @@
             <td th:text="${result.scoreTotal}">Score Total</td>
             <td th:text="${result.rank}">Rank</td>
             <td th:text="${result.performanceClass}">Performance Class</td>
+
+            <td th:text="${result.competition != null ? result.competition.name : 'No Competition'}">Competition</td>
+            <td th:text="${result.competition != null ? result.competition.discipline : 'No Discipline'}">Discipline</td>
+            <td th:text="${result.user != null ? result.user.firstName : 'No First Name'}">User First Name</td>
+            <td th:text="${result.user != null ? result.user.lastName : 'No Last Name'}">User Last Name</td>
+<!--            <td th:text="${result.user != null ? result.user.club.name : 'No Club'}">User Club</td>-->
+
+            <td th:if="${result.user != null}" th:text="${result.user.club != null ? result.user.club.name : 'No Club'}">User Club</td>
+            <td th:if="${result.user == null}">No Club</td>
+
             <td>
                 <a th:href="@{/results/edit/{id}(id=${result.id})}">Edit</a>
                 <a th:href="@{/results/delete/{id}(id=${result.id})}">Delete</a>
