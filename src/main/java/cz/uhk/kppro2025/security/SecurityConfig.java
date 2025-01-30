@@ -37,6 +37,18 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // NEW: -------------------------------
+                        // only ADMIN can access these URLs
+                        // whole main pages and linked forms
+                        .requestMatchers("/addresses/**").hasRole("ADMIN")
+                        .requestMatchers("/users/**").hasRole("ADMIN")
+                        // action pages (forms) linked from main pages
+                        .requestMatchers("/clubs/new", "/clubs/edit/**", "/clubs/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/competitions/new", "/competitions/edit/**", "/competitions/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/results/new", "/results/edit/**", "/results/delete/**").hasRole("ADMIN")
+                        // NEW: -------------------------------
+
                         .anyRequest().authenticated()
                 )
 
