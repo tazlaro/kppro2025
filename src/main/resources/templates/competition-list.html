@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Competitions</title>
 </head>
 <body>
     <h1>Competitions</h1>
-    <a th:href="@{/competitions/new}">Add New Competition</a>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/competitions/new}">Add New Competition</a>
     <table>
         <thead>
         <tr>
@@ -14,7 +14,9 @@
             <th>Discipline</th>
             <th>Description</th>
             <th>Proposition</th>
+
             <th>Club</th>
+
             <th>Actions</th>
         </tr>
         </thead>
@@ -35,8 +37,8 @@
 
             <td>
                 <a th:href="@{/competitions/detail/{id}(id=${competition.id})}">View Details</a>
-                <a th:href="@{/competitions/edit/{id}(id=${competition.id})}">Edit</a>
-                <a th:href="@{/competitions/delete/{id}(id=${competition.id})}">Delete</a>
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/competitions/edit/{id}(id=${competition.id})}">Edit</a>
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/competitions/delete/{id}(id=${competition.id})}">Delete</a>
             </td>
         </tr>
         </tbody>

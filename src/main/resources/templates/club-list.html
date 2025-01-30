@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Clubs</title>
 </head>
 <body>
     <h1>Clubs</h1>
-    <a th:href="@{/clubs/new}">Add New Club</a>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/clubs/new}">Add New Club</a>
     <table>
         <thead>
         <tr>
@@ -26,8 +26,8 @@
             <td th:text="${club.phone}">Phone</td>
             <td>
                 <a th:href="@{/clubs/detail/{id}(id=${club.id})}">View Details</a>
-                <a th:href="@{/clubs/edit/{id}(id=${club.id})}">Edit</a>
-                <a th:href="@{/clubs/delete/{id}(id=${club.id})}">Delete</a>
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/clubs/edit/{id}(id=${club.id})}">Edit</a>
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/clubs/delete/{id}(id=${club.id})}">Delete</a>
             </td>
         </tr>
         </tbody>

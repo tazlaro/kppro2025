@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Results</title>
 </head>
 <body>
     <h1>Results</h1>
-    <a th:href="@{/results/new}">Add New Result</a>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/results/new}">Add New Result</a>
     <table>
         <thead>
         <tr>
@@ -19,7 +19,7 @@
             <th>Last Name</th>
             <th>Club</th>
 
-            <th>Actions</th>
+            <th sec:authorize="hasRole('ADMIN')">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
             <td th:if="${result.user != null}" th:text="${result.user.club != null ? result.user.club.name : 'No Club'}">User Club</td>
             <td th:if="${result.user == null}">No Club</td>
 
-            <td>
+            <td sec:authorize="hasRole('ADMIN')">
                 <a th:href="@{/results/edit/{id}(id=${result.id})}">Edit</a>
                 <a th:href="@{/results/delete/{id}(id=${result.id})}">Delete</a>
             </td>
