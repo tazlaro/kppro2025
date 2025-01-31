@@ -2,30 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Competition Form</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Competition Form</h1>
     <form th:action="@{/competitions}" th:object="${competition}" method="post">
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
         <label for="name">Name:</label>
-        <input type="text" id="name" th:field="*{name}" />
+        <input type="text" id="name" th:field="*{name}"/>
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         <br/>
         <label for="date">Date:</label>
-        <input type="date" id="date" th:field="*{date}" />
+        <input type="date" id="date" th:field="*{date}"/>
         <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
         <br/>
         <label for="discipline">Discipline:</label>
-        <input type="text" id="discipline" th:field="*{discipline}" />
+        <input type="text" id="discipline" th:field="*{discipline}"/>
         <span th:if="${#fields.hasErrors('discipline')}" th:errors="*{discipline}"></span>
         <br/>
         <label for="description">Description:</label>
-        <input type="text" id="description" th:field="*{description}" />
+        <input type="text" id="description" th:field="*{description}"/>
         <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
         <br/>
         <label for="proposition">Proposition:</label>
-        <input type="text" id="proposition" th:field="*{proposition}" />
+        <input type="text" id="proposition" th:field="*{proposition}"/>
         <span th:if="${#fields.hasErrors('proposition')}" th:errors="*{proposition}"></span>
         <br/>
 
@@ -38,5 +44,6 @@
 
         <button type="submit">Save</button>
     </form>
+</main>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<nav xmlns:sec="http://www.w3.org/1999/xhtml">
+    <form method="post" th:action="@{/logout}" class="logout-form">
+        <input type="submit" value="Logout">
+    </form>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/addresses}">Addresses</a></li>
+        <li><a th:href="@{/clubs}">Clubs</a></li>
+        <li><a th:href="@{/competitions}">Competitions</a></li>
+        <li><a th:href="@{/results}">Results</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/users}">Users</a></li>
+    </ul>
+</nav>

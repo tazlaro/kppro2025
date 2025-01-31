@@ -2,8 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Club Detail</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Club Detail</h1>
     <h2 th:text="${club.name}">Club Name</h2>
     <p><strong>Number:</strong> <span th:text="${club.number}">Number</span></p>
@@ -66,5 +72,6 @@
     </table>
 
     <a th:href="@{/clubs}">Back to Clubs</a>
+</main>
 </body>
 </html>

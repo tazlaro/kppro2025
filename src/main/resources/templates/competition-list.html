@@ -2,8 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Competitions</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Competitions</h1>
     <a sec:authorize="hasRole('ADMIN')" th:href="@{/competitions/new}">Add New Competition</a>
     <table>
@@ -24,15 +30,15 @@
         <tr th:each="competition : ${competitions}">
             <td th:text="${competition.name}">Name</td>
 
-<!--            <td th:text="${competition.date}">Date</td>-->
+            <!-- <td th:text="${competition.date}">Date</td> -->
             <td th:text="${#dates.format(competition.date, 'yyyy-MM-dd')}">Date</td>
 
             <td th:text="${competition.discipline}">Discipline</td>
             <td th:text="${competition.description}">Description</td>
             <td th:text="${competition.proposition}">Proposition</td>
 
-<!--            Check if the club is not null, if it is not null, display the club name, otherwise display 'No Club'-->
-<!--            Club is a property of the competition object. It is a many-to-one relationship.-->
+            <!-- Check if the club is not null, if it is not null, display the club name, otherwise display 'No Club' -->
+            <!-- Club is a property of the competition object. It is a many-to-one relationship. -->
             <td th:text="${competition.club != null ? competition.club.name : 'No Club'}">Club</td>
 
             <td>
@@ -43,5 +49,6 @@
         </tr>
         </tbody>
     </table>
+</main>
 </body>
 </html>

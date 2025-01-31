@@ -2,8 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Users</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Users</h1>
     <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/new}">Add New User</a>
     <table>
@@ -31,14 +37,14 @@
             <td th:text="${user.firstName}">First Name</td>
             <td th:text="${user.lastName}">Last Name</td>
 
-<!--            <td th:text="${user.birthday}">Birthday</td>-->
+            <!--            <td th:text="${user.birthday}">Birthday</td>-->
             <td th:text="${#dates.format(user.birthday, 'yyyy-MM-dd')}">Birthday</td>
 
             <td th:text="${user.email}">Email</td>
             <td th:text="${user.phone}">Phone</td>
 
-<!--            Check if the club is not null, if it is not null, display the club name, otherwise display 'No Club'-->
-<!--            Club is a property of the user object. It is a many-to-one relationship.-->
+            <!-- Check if the club is not null, if it is not null, display the club name, otherwise display 'No Club' -->
+            <!-- Club is a property of the user object. It is a many-to-one relationship. -->
             <td th:text="${user.club != null ? user.club.name : 'No Club'}">Club</td>
 
             <td sec:authorize="hasRole('ADMIN')">
@@ -49,5 +55,6 @@
         </tr>
         </tbody>
     </table>
+</main>
 </body>
 </html>

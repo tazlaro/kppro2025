@@ -2,8 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Results</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Results</h1>
     <a sec:authorize="hasRole('ADMIN')" th:href="@{/results/new}">Add New Result</a>
     <table>
@@ -29,12 +35,15 @@
             <td th:text="${result.performanceClass}">Performance Class</td>
 
             <td th:text="${result.competition != null ? result.competition.name : 'No Competition'}">Competition</td>
-            <td th:text="${result.competition != null ? result.competition.discipline : 'No Discipline'}">Discipline</td>
+            <td th:text="${result.competition != null ? result.competition.discipline : 'No Discipline'}">Discipline
+            </td>
             <td th:text="${result.user != null ? result.user.firstName : 'No First Name'}">User First Name</td>
             <td th:text="${result.user != null ? result.user.lastName : 'No Last Name'}">User Last Name</td>
-<!--            <td th:text="${result.user != null ? result.user.club.name : 'No Club'}">User Club</td>-->
+            <!-- <td th:text="${result.user != null ? result.user.club.name : 'No Club'}">User Club</td> -->
 
-            <td th:if="${result.user != null}" th:text="${result.user.club != null ? result.user.club.name : 'No Club'}">User Club</td>
+            <td th:if="${result.user != null}"
+                th:text="${result.user.club != null ? result.user.club.name : 'No Club'}">User Club
+            </td>
             <td th:if="${result.user == null}">No Club</td>
 
             <td sec:authorize="hasRole('ADMIN')">
@@ -44,5 +53,6 @@
         </tr>
         </tbody>
     </table>
+</main>
 </body>
 </html>

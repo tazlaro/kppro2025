@@ -2,8 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Clubs</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Clubs</h1>
     <a sec:authorize="hasRole('ADMIN')" th:href="@{/clubs/new}">Add New Club</a>
     <table>
@@ -32,5 +38,6 @@
         </tr>
         </tbody>
     </table>
+</main>
 </body>
 </html>

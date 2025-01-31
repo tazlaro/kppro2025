@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>User Detail</title>
+    <title>User Detail</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-  <h1>User Detail</h1>
-  <p>Username: <span th:text="${user.username}"></span></p>
-  <p>Password: <span th:text="${user.password}"></span></p>
-  <p>Role: <span th:text="${user.role}"></span></p>
-  <p>First Name: <span th:text="${user.firstName}"></span></p>
-  <p>Last Name: <span th:text="${user.lastName}"></span></p>
-  <p>Birthday: <span th:text="${#dates.format(user.birthday, 'yyyy-MM-dd')}"></span></p>
-  <p>Email: <span th:text="${user.email}"></span></p>
-  <p>Phone: <span th:text="${user.phone}"></span></p>
-  <p>Club: <span th:text="${user.club != null ? user.club.name : 'No Club'}"></span></p>
-  <p>Street: <span th:text="${user.address.street}"></span></p>
-  <p>City: <span th:text="${user.address.city}"></span></p>
-  <p>Zip: <span th:text="${user.address.zip}"></span></p>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
+    <h1>User Detail</h1>
+    <p>Username: <span th:text="${user.username}"></span></p>
+    <p>Password: <span th:text="${user.password}"></span></p>
+    <p>Role: <span th:text="${user.role}"></span></p>
+    <p>First Name: <span th:text="${user.firstName}"></span></p>
+    <p>Last Name: <span th:text="${user.lastName}"></span></p>
+    <p>Birthday: <span th:text="${#dates.format(user.birthday, 'yyyy-MM-dd')}"></span></p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+    <p>Phone: <span th:text="${user.phone}"></span></p>
+    <p>Club: <span th:text="${user.club != null ? user.club.name : 'No Club'}"></span></p>
+    <p>Street: <span th:text="${user.address.street}"></span></p>
+    <p>City: <span th:text="${user.address.city}"></span></p>
+    <p>Zip: <span th:text="${user.address.zip}"></span></p>
+</main>
 </body>
 </html>

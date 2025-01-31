@@ -2,22 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Result Form</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Result Form</h1>
     <form th:action="@{/results}" th:object="${result}" method="post">
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
         <label for="scoreTotal">Score Total:</label>
-        <input type="text" id="scoreTotal" th:field="*{scoreTotal}" />
+        <input type="text" id="scoreTotal" th:field="*{scoreTotal}"/>
         <span th:if="${#fields.hasErrors('scoreTotal')}" th:errors="*{scoreTotal}"></span>
         <br/>
         <label for="rank">Rank:</label>
-        <input type="text" id="rank" th:field="*{rank}" />
+        <input type="text" id="rank" th:field="*{rank}"/>
         <span th:if="${#fields.hasErrors('rank')}" th:errors="*{rank}"></span>
         <br/>
         <label for="performanceClass">Performance Class:</label>
-        <input type="text" id="performanceClass" th:field="*{performanceClass}" />
+        <input type="text" id="performanceClass" th:field="*{performanceClass}"/>
         <span th:if="${#fields.hasErrors('performanceClass')}" th:errors="*{performanceClass}"></span>
         <br/>
 
@@ -37,5 +43,6 @@
 
         <button type="submit">Save</button>
     </form>
+</main>
 </body>
 </html>

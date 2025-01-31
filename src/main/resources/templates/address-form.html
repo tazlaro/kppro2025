@@ -2,34 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Address Form</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+
+<!-- load navigation <nav>...</>nav> from nav.html -->
+<div th:replace="nav :: nav"></div>
+
+<main>
     <h1>Address Form</h1>
 
-<!--    Nutne nastavit parametr id na puvodni hodnotu editovaneho objektu, jinak se vytvori novy zaznam v DB  -->
-<!--    1. zpusob z AI  -->
-    <!--    <form th:action="@{/addresses/update/{id}(id=${address.id})}" th:object="${address}" method="post">-->
-<!--    2. zpusob ze cviceni  -->
+    <!-- Nutne nastavit parametr id na puvodni hodnotu editovaneho objektu, jinak se vytvori novy zaznam v DB -->
+    <!-- 1. zpusob z AI -->
+    <!-- <form th:action="@{/addresses/update/{id}(id=${address.id})}" th:object="${address}" method="post"> -->
+    <!-- 2. zpusob ze cviceni -->
     <form th:action="@{/addresses}" th:object="${address}" method="post">
         <input type="hidden" th:field="*{id}">
 
         <label for="street">Street:</label>
-        <input type="text" id="street" th:field="*{street}" />
+        <input type="text" id="street" th:field="*{street}"/>
         <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
         <br/>
         <label for="city">City:</label>
-        <input type="text" id="city" th:field="*{city}" />
+        <input type="text" id="city" th:field="*{city}"/>
         <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
         <br/>
         <label for="zip">ZIP:</label>
-        <input type="text" id="zip" th:field="*{zip}" />
+        <input type="text" id="zip" th:field="*{zip}"/>
         <span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span>
         <br/>
         <label for="country">Country:</label>
-        <input type="text" id="country" th:field="*{country}" />
+        <input type="text" id="country" th:field="*{country}"/>
         <span th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
         <br/>
         <button type="submit">Save</button>
     </form>
+</main>
 </body>
 </html>
