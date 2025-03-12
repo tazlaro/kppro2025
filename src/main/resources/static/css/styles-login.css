@@ -1,4 +1,4 @@
-/* src/main/resources/static/css/styles.css */
+/* src/main/resources/static/css/styles-login.css */
 
 body {
     display: flex;
@@ -9,90 +9,27 @@ body {
     padding: 0;
 }
 
-nav {
-    width: 200px;
-    background-color: #ff4500; /* Orange background */
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+/* login specific */
+body {
+    justify-content: center;
     align-items: center;
-    color: #fff;
+    height: 100vh;
 }
 
-nav li {
-    margin: 10px 0;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 5px 0;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
+/* login specific */
 main {
-    flex-grow: 1;
-    padding: 20px;
-}
-
-table {
     width: 100%;
-    border-collapse: collapse;
+    max-width: 400px; /* Set a maximum width for the form */
+    padding: 20px;
     background-color: #ffffe0; /* Pale yellow background */
-    margin-bottom: 20px;
-}
-
-table, th, td {
     border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #ff6347; /* Red background */
-    color: #fff;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-button, input[type="submit"] {
-    background-color: #ff4500; /* Orange background */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-button:hover, input[type="submit"]:hover {
-    background-color: #ff6347; /* Red background */
-}
-
-/* Logout button on top of navigation */
-
-.logout-form {
-    margin: 0;
-    padding: 0;
-}
-
-.logout-form input[type="submit"] {
-    background-color: #ff4500; /* Orange background */
-    color: #fff;
-    border: none;
-    font-weight: bold;
-    font-size: 16px;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin: 0;
-    padding: 10px 20px;
+}
+
+/* login specific */
+h1 {
+    text-align: center;
 }
 
 /* Error and logout messages */
@@ -102,16 +39,25 @@ button:hover, input[type="submit"]:hover {
     margin-bottom: 10px;
 }
 
+/* login specific */
+.error-message, .logout-message {
+    text-align: center;
+}
+
 /* Form styling */
 
 form {
     background-color: #ffffe0; /* Pale yellow background */
-    /*background-color: #fff;*/
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+/* login specific */
+form {
+    text-align: center;
 }
 
 form label {
